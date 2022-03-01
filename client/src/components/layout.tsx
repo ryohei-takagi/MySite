@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
 const Layout: React.FC = ({ children }) => {
   return (
     <React.Fragment>
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
       <GlobalStyle />
       {children}
     </React.Fragment>
