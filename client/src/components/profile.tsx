@@ -17,7 +17,9 @@ const height = document.documentElement.clientHeight
 const Wrap = styled.section`
   position: relative;
   width: 100%;
-  height: ${height}px;
+  ${pc`
+    height: ${height}px;
+  `}
 `
 
 const H3 = styled.h3`
@@ -159,6 +161,7 @@ const DetailBody = styled.div`
 
 const P = styled.p`
   margin: 5px 0;
+  line-height: 1.4em;
 `
 
 const AWSBadgeUl = styled.ul`
