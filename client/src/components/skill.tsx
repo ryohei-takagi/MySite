@@ -14,12 +14,10 @@ import Laravel from '../images/icons/laravel.png'
 import Scala from '../images/icons/scala.png'
 
 const width = document.documentElement.clientWidth
-const height = document.documentElement.clientHeight
 
 const Wrap = styled.section`
   position: relative;
   width: 100%;
-  height: ${height}px;
 `
 
 const H3 = styled.h3`

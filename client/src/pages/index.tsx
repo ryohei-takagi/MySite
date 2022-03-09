@@ -4,6 +4,7 @@ import Menu from '../components/menu'
 import Top from '../components/top'
 import Profile from '../components/profile'
 import Skill from '../components/skill'
+import Contact from '../components/contact'
 
 const IndexPage = () => {
   return (
@@ -15,6 +16,7 @@ const IndexPage = () => {
         <Top/>
         <Profile/>
         <Skill/>
+        <Contact/>
       </main>
     </Layout>
   )
