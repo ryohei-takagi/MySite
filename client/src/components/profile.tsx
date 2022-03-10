@@ -47,7 +47,7 @@ const Name = styled.div`
     text-align: center;
   `}
   ${tab`
-    padding-left: 150px;
+    margin-left: 130px;
   `}
   ${pc`
     padding-left: 150px;
@@ -68,7 +68,7 @@ const NameEnglish = styled.div`
 const ThirdPartyUl = styled.ul`
   ${sp`
     text-align: right;
-    margin: 15px 25px 0 0;
+    margin: 15px 50px 0 0;
   `}
   ${tab`
     display: inline;
@@ -109,7 +109,7 @@ const ImageUl = styled.ul`
   `}
   ${pc`
     position: absolute;
-    left: ${width / 2  + 125}px;
+    left: ${width / 2  + 250}px;
   `}
 `
 
@@ -157,6 +157,13 @@ const DetailTitle = styled.div`
 const DetailBody = styled.div`
   font-size: 1.5em;
   padding: 25px 35px 25px 35px;
+`
+
+const HobbyTitle = DetailTitle
+
+const HobbyBody = styled.div`
+  font-size: 1.5em;
+  padding: 15px 35px 25px 35px;
 `
 
 const P = styled.p`
@@ -213,22 +220,21 @@ const Profile = () => {
       </Name>
       <ImageUl>
         <ImageLi><Image src={Profile1}/></ImageLi>
-        <ImageLi><Image src={Profile1}/></ImageLi>
       </ImageUl>
       <Detail>
         <DetailTitle>DevOpsエンジニア・アーキテクト</DetailTitle>
         <DetailBody>
-          <P>1991年生まれ。</P>
-          <P>2014年から2018年まで中小IT企業でSI業務に従事。</P>
-          <P>2018年から現在までスタートアップ企業でクラウド設計・SRE業務に従事。</P>
+          <P>1991年生まれ</P>
+          <P>2014年から2018年まで中小IT企業でSI業務に従事</P>
+          <P>2018年から現在までスタートアップ企業でクラウド設計・SRE業務に従事</P>
         </DetailBody>
       </Detail>
       <Detail>
-        <DetailTitle>趣味</DetailTitle>
-        <DetailBody>
-          <P>・ネット麻雀・観る雀</P>
+        <HobbyTitle>趣味</HobbyTitle>
+        <HobbyBody>
+          <P>・競技麻雀</P>
           <P>・アニソンライブ</P>
-        </DetailBody>
+        </HobbyBody>
       </Detail>
       <AWSBadgeUl>
         {awsBadgeData.map(v => {

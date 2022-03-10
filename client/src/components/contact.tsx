@@ -11,7 +11,9 @@ const height = document.documentElement.clientHeight
 const Wrap = styled.section`
   position: relative;
   width: 100%;
-  height: ${height}px;
+  ${pc`
+    height: ${height}px;
+  `}
 `
 
 const H3 = styled.h3`
@@ -87,6 +89,12 @@ const Sub = styled.sub`
   color: red;
 `
 
+const ButtonArea = styled.div`
+  position: relative;
+  margin-top: 15px;
+  height: 100px;
+`
+
 const SubmitButton = styled.button`
   position: absolute;
   left 0;
@@ -155,9 +163,9 @@ const Contact = () => {
           </DefinitionDescription>
         </Field>
       </DefinitionList>
-      <Field>
+      <ButtonArea>
         <SubmitButton onClick={() => setConfirm(true)}>送信</SubmitButton>
-      </Field>
+      </ButtonArea>
       <ContactConfirm
         open={confirm}
         onSubmit={onSubmit}

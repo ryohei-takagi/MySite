@@ -5,6 +5,7 @@ import Top from '../components/top'
 import Profile from '../components/profile'
 import Skill from '../components/skill'
 import Contact from '../components/contact'
+import Footer from '../components/footer'
 
 const IndexPage = () => {
   return (
@@ -18,6 +19,9 @@ const IndexPage = () => {
         <Skill/>
         <Contact/>
       </main>
+      <footer>
+        <Footer/>
+      </footer>
     </Layout>
   )
 }
