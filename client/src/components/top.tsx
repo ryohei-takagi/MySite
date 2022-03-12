@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import {pc, sp, tab} from '../styles/responsive'
+import {useCallback, useEffect, useState} from 'react'
 
 const height = document.documentElement.clientHeight
 
@@ -75,10 +76,10 @@ const H2 = styled.h2`
   font-weight: thin;
   
   ${sp`
-    top: 177px;
-    height: 17px;
-    line-height: 17px;
-    font-size: 1.7em;
+    top: 175px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 1.8em;
   `}
   ${tab`
     top: 245px;
@@ -88,16 +89,87 @@ const H2 = styled.h2`
   `}
   ${pc`
     top: 145px;
-    height: 25px;
-    line-height: 25px;
-    font-size: 2.5em;
+    height: 35px;
+    line-height: 35px;
+    font-size: 3.5em;
   `}
 `
 
-const SubTitle = styled.div`
+const SubTitle = styled.div.attrs(props => ({ isTyping: props.isTyping }))`
+  ${props => props.isTyping ? `
+    @keyframes blink {
+      0% {background-color: currentColor}
+      50% {background-color: currentColor}
+      51% {background-color: rgba(0,0,0,0)}
+      100% {background-color: rgba(0,0,0,0)}
+    }
+    &:after {
+      content: '';
+      display: inline-block;
+      vertical-align: -0.15em;
+      margin-left: 0.1em;
+      width: 1px;
+      animation: blink 0.3s infinite alternate;
+    }
+    
+    ${sp`
+      &:after {
+        height: 18px;
+      }
+    `}
+    ${tab`
+      &:after {
+        height: 25px;
+      }
+    `}
+    ${pc`
+      &:after {
+        height: 35px;
+      }
+    `}
+  ` : ""
+  }
 `
 
+const text1st = "DevOps Engineer"
+const text2nd = " & Architect"
+
 const Top = () => {
+  const [subTitle, setSubTitle] = useState<string>("")
+  const [isTyping, setIsTyping] = useState<boolean>(false)
+
+  const setChar = useCallback((charItr: IterableIterator<string>) => {
+    const nextChar = charItr.next()
+    if (nextChar.done) {
+      return
+    }
+
+    setSubTitle(current => current + nextChar.value)
+
+    const rand = Math.random() * 50
+    setTimeout(() => setChar(charItr), 50 + rand)
+  }, [])
+
+  useEffect(() => {
+    setSubTitle("")
+    setIsTyping(true)
+    const charItr = text1st[Symbol.iterator]()
+    setChar(charItr)
+  }, [setChar])
+
+  useEffect(() => {
+    if (subTitle == text1st) {
+      const charItr = text2nd[Symbol.iterator]()
+      setTimeout(() => setChar(charItr), 500)
+    }
+  }, [setChar, subTitle])
+
+  useEffect(() => {
+    if (subTitle == `${text1st}${text2nd}`) {
+      setIsTyping(false)
+    }
+  }, [subTitle])
+
   return (
     <Wrap>
       <H1>
@@ -105,7 +177,7 @@ const Top = () => {
         <LastName>TAKAGI</LastName>
       </H1>
       <H2>
-        <SubTitle>DevOps Engineer & Architect</SubTitle>
+        <SubTitle isTyping={isTyping}>{subTitle}</SubTitle>
       </H2>
     </Wrap>
   )
