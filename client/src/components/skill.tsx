@@ -132,6 +132,7 @@ const Star = styled(Rating)`
 `
 
 const BodySection = styled.ul`
+  padding: 0 10px;
 `
 
 const Sentence = styled.li`
