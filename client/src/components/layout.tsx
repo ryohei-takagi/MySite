@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
   
   body {
     font-family: -apple-system, Roboto, sans-serif, serif;
-    background-color: #F5F5F5;
+    background-color: #F7F6F5;
     font-size: 62.5%;
   }
 `

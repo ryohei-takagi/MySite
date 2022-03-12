@@ -92,7 +92,7 @@ const Sub = styled.sub`
 const ButtonArea = styled.div`
   position: relative;
   margin-top: 15px;
-  height: 100px;
+  height: 50px;
 `
 
 const SubmitButton = styled.button`

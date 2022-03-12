@@ -7,7 +7,7 @@ const Nav = styled.nav`
   position: fixed;
   z-index: 1;
   width: 100%;
-  background-color: #F5F5F5;
+  background-color: #F7F6F5;
   
   ${sp`
     font-size: 1.8em;
