@@ -233,7 +233,7 @@ const Profile = () => {
         <HobbyTitle>趣味</HobbyTitle>
         <HobbyBody>
           <P>・競技麻雀</P>
-          <P>・アニソンライブ</P>
+          <P>・アニソンライブ観戦</P>
         </HobbyBody>
       </Detail>
       <AWSBadgeUl>
