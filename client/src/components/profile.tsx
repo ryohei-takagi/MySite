@@ -94,8 +94,8 @@ const ThirdPartyIcon = styled.img`
 `
 
 const thirdPartyData = [
-  { "image": QiitaIcon, "link": "https://qiita.com/rtflatspace1" },
-  { "image": GithubIcon, "link": "https://github.com/ryohei-takagi" },
+  { "key": "qiita", "image": QiitaIcon, "link": "https://qiita.com/rtflatspace1" },
+  { "key": "github", "image": GithubIcon, "link": "https://github.com/ryohei-takagi" },
 ]
 
 const ImageUl = styled.ul`
@@ -197,12 +197,12 @@ const AWSBadge = styled.img`
 `
 
 const awsBadgeData = [
-  { "image": AWSSolutionArchitectProfessionalBadge, "link": "https://www.credly.com/badges/79f67bfd-a5f7-4c0d-901e-d8054f6acef9/public_url" },
-  { "image": AWSDevOpsEngineerProfessionalBadge, "link": "https://www.credly.com/badges/448cbb88-2393-4773-a09f-caa5b03c4dc9/public_url" },
-  { "image": AWSSolutionArchitectAssociateBadge, "link": "https://www.credly.com/badges/6a676cb0-4758-4423-a053-c3a120bcc51c/public_url" },
-  { "image": AWSDeveloperAssociateBadge, "link": "https://www.credly.com/badges/f2d29b8a-f1a0-49b4-b85b-8ee0bea1d4a2/public_url" },
-  { "image": AWSSysOpsAdministratorAssociateBadge, "link": "https://www.credly.com/badges/8a1f632e-a61b-434c-b428-f03e0e8ea77b/public_url" },
-  { "image": AWSCloudPractitionerBadge, "link": "https://www.credly.com/badges/1c76d98e-c5dc-45f7-865f-2d08fa872fbb/public_url" },
+  { "key": "sap", "image": AWSSolutionArchitectProfessionalBadge, "link": "https://www.credly.com/badges/79f67bfd-a5f7-4c0d-901e-d8054f6acef9/public_url" },
+  { "key": "dop", "image": AWSDevOpsEngineerProfessionalBadge, "link": "https://www.credly.com/badges/448cbb88-2393-4773-a09f-caa5b03c4dc9/public_url" },
+  { "key": "saa", "image": AWSSolutionArchitectAssociateBadge, "link": "https://www.credly.com/badges/6a676cb0-4758-4423-a053-c3a120bcc51c/public_url" },
+  { "key": "dva", "image": AWSDeveloperAssociateBadge, "link": "https://www.credly.com/badges/f2d29b8a-f1a0-49b4-b85b-8ee0bea1d4a2/public_url" },
+  { "key": "soa", "image": AWSSysOpsAdministratorAssociateBadge, "link": "https://www.credly.com/badges/8a1f632e-a61b-434c-b428-f03e0e8ea77b/public_url" },
+  { "key": "clf", "image": AWSCloudPractitionerBadge, "link": "https://www.credly.com/badges/1c76d98e-c5dc-45f7-865f-2d08fa872fbb/public_url" },
 ]
 
 const Profile = () => {
@@ -214,7 +214,7 @@ const Profile = () => {
         <NameEnglish>TAKAGI RYOHEI</NameEnglish>
         <ThirdPartyUl>
           {thirdPartyData.map(v => {
-            return <ThirdPartyLi><ThirdPartyIcon src={v.image} onClick={() => window.open(v.link)}/></ThirdPartyLi>
+            return <ThirdPartyLi key={v.key}><ThirdPartyIcon src={v.image} onClick={() => window.open(v.link)}/></ThirdPartyLi>
           })}
         </ThirdPartyUl>
       </Name>
@@ -238,7 +238,7 @@ const Profile = () => {
       </Detail>
       <AWSBadgeUl>
         {awsBadgeData.map(v => {
-          return <AWSBadgeLi><AWSBadge src={v.image} onClick={() => window.open(v.link)}/></AWSBadgeLi>
+          return <AWSBadgeLi key={v.key}><AWSBadge src={v.image} onClick={() => window.open(v.link)}/></AWSBadgeLi>
         })}
       </AWSBadgeUl>
     </Wrap>

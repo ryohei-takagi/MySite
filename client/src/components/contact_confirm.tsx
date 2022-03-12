@@ -66,7 +66,7 @@ const ContactConfirm = (props: Props) => {
       <DialogContent>
         {validationMessages.length > 0 &&
           <VUl>
-            {validationMessages.map(m => <VLi>{m}</VLi>)}
+            {validationMessages.map(m => <VLi key={m}>{m}</VLi>)}
           </VUl>
         }
         <P>
