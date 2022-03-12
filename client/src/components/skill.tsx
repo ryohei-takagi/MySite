@@ -74,7 +74,7 @@ const Detail = styled.section`
   ${pc`
     width: ${width / 10 * 4}px;
     max-width: 480px;
-    height: 360px;
+    height: 260px;
   `}
 `
 
@@ -131,78 +131,89 @@ const Star = styled(Rating)`
   margin-left: 15px;
 `
 
-const P = styled.p`
-  margin: 5px 0;
+const BodySection = styled.ul`
+`
+
+const Sentence = styled.li`
+  margin: 10px 0;
   line-height: 1.4em;
+  list-style: disc;
+`
+
+const A = styled.a`
+  color: #00608D;
+  text-decoration: none;
+  
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `
 
 const sections = [
   { "image": Fargate, "name": "AWS", "rating": 5, "body":
-    <>
-      <P>Solution Architect Professional および DevOps Engineer Professional の資格を継続更新しています。</P>
-      <P>コンテナオーケストレーション、CI/CD環境、DataLake、ETLや分析基盤の設計および構築が得意分野です。</P>
-      <P>主にサーバーレス、マネージメントサービスを組み合わせたアーキテクチャを提案できます。</P>
-    </>
+    <BodySection>
+      <Sentence>Solution Architect Professional & DevOps Engineer Professional</Sentence>
+      <Sentence>コンテナオーケストレーション、CI/CD、DataLake、ETL・分析基盤の設計</Sentence>
+      <Sentence>サーバーレス、マネージメントサービス主体のソリューション提案</Sentence>
+    </BodySection>
   },
   { "image": Datadog, "name": "Datadog", "rating": 4, "body":
-    <>
-      <P>ログの配信、ダッシュボード、外形監視やアラートなど様々な監視リソースを構築できます。</P>
-      <P>さらに、各プロジェクトに応じたサービスレベル目標(SLO)を提案できます。</P>
-      <P>AWSのログをDatadogに配信するアーキテクチャの一例を<a target="_blank" href="https://qiita.com/rtflatspace1/items/74c84effcdd040f8517d">こちら</a>に公開しています。</P>
-    </>
+    <BodySection>
+      <Sentence>ログ配信、ダッシュボード、外形監視、アラート等の監視リソース設計</Sentence>
+      <Sentence>各プロジェクトに応じたサービスレベル目標(SLO)の提案</Sentence>
+      <Sentence>事例 <A target="_blank" href="https://qiita.com/rtflatspace1/items/74c84effcdd040f8517d">外部サイト</A> (Qiita)</Sentence>
+    </BodySection>
   },
   { "image": Terraform, "name": "Terraform", "rating": 5, "body":
-      <>
-        <P>IaC(Infrastructure as Code)を推進しています。AWSやDatadogのリソースをTerraformで実装できます。</P>
-        <P>Terraformを利用した実装の一例を<a target="_blank" href="https://qiita.com/rtflatspace1/items/74c84effcdd040f8517d">こちら</a>に公開しています。</P>
-      </>
+    <BodySection>
+      <Sentence>IaC(Infrastructure as Code)の推進</Sentence>
+      <Sentence>AWS、Datadog等のリソースTerraform化</Sentence>
+      <Sentence>事例 <A target="_blank" href="https://qiita.com/rtflatspace1/items/4cb454240586b1480041">外部サイト</A> (Qiita)</Sentence>
+    </BodySection>
   },
   { "image": GoIcon, "name": "Go", "rating": 4, "body":
-    <>
-      <P>3年以上の業務経験があります。APIやWebサービス、マイクロサービスの設計および実装ができます。</P>
-      <P>また、gRPCを利用したサービス間の連携、並行処理による負荷対策など、上級レベルの実装も可能です。</P>
-      <P>テストコードを書くための設計手法を<a target="_blank" href="https://qiita.com/rtflatspace1/items/a0ec0017226df76df684">こちら</a>に公開しています。</P>
-    </>
+    <BodySection>
+      <Sentence>API、Web、マイクロサービスの設計</Sentence>
+      <Sentence>gRPCを利用したサービス間の連携、並行処理による負荷対策</Sentence>
+      <Sentence>事例 <A target="_blank" href="https://qiita.com/rtflatspace1/items/a0ec0017226df76df684">外部サイト</A> (Qiita)</Sentence>
+    </BodySection>
   },
   { "image": Typescript, "name": "Typescript", "rating": 5, "body":
-      <>
-        <P>3年以上の業務経験があります。WebフロントエンドではReactやVue.jsと組み合わせて活用できます。</P>
-        <P>サーバーサイドの分野では、FaaSのランタイムに選定することが多いです。</P>
-        <P>とくに技術選定でTypescriptを選ぶことが多く、個人的に一番肌の合う言語です。</P>
-      </>
+    <BodySection>
+      <Sentence>API、Web、マイクロサービスのサーバーサイド設計</Sentence>
+      <Sentence>ReactやVue.jsを組み合わせたフロントエンド設計</Sentence>
+    </BodySection>
   },
   { "image": ReactIcon, "name": "React", "rating": 4, "body":
-      <>
-        <P>React Hooksを活用したコンポーネントの設計および実装ができます。</P>
-        <P>ReduxやRecoilを活用したステート管理など、上級レベルの実装も可能です。</P>
-        <P>当サイトが、Gatsbyを活用したReactベースのコーディングで構築されています。</P>
-      </>
+    <BodySection>
+      <Sentence>React Hooksを活用したコンポーネント設計</Sentence>
+      <Sentence>ReduxやRecoilを活用したステート管理</Sentence>
+    </BodySection>
   },
   { "image": Vue, "name": "Vue.js", "rating": 3, "body":
-      <>
-        <P>Vue.js バージョン2およびNuxt.jsの経験があります。</P>
-        <P>技術選定ではReactを選ぶことが多いですが、Vue.jsを活用した一連のフロントエンドサービスを作成することができます。</P>
-      </>
+    <BodySection>
+      <Sentence>Nuxt.jsを活用したコンポーネント設計</Sentence>
+      <Sentence>Vuexを活用したステート管理</Sentence>
+    </BodySection>
   },
   { "image": PHP, "name": "PHP", "rating": 5, "body":
-      <>
-        <P>5年以上の業務経験があります。Laravelを活用したWebサービスの実装ができます。</P>
-        <P>現在まで活用したことのあるフレームワークは、Laravel、Ethna、ZendFramework2、CakePHP2があります。</P>
-      </>
+    <BodySection>
+      <Sentence>Laravelを活用したAPI、Webサービス設計</Sentence>
+      <Sentence>Laravel、Ethna、ZendFramework2、CakePHP2</Sentence>
+    </BodySection>
   },
   { "image": Laravel, "name": "Laravel", "rating": 5, "body":
-      <>
-        <P>Webサービス、キューイング、スケジュールバッチなど様々な要件に応じた実装ができます。</P>
-        <P>ReactやVue.jsとの連携、認証認可基盤でフロントエンドとサーバーサイドの繋ぎこみを実現します。</P>
-        <P>機能要件、非機能要件までWebサービスのオールインワン設計を提案できます。</P>
-      </>
+    <BodySection>
+      <Sentence>Webサービス、キューイング、スケジュールバッチ</Sentence>
+      <Sentence>ReactやVue.jsの連携、認証認可基盤とフロントエンド、サーバーサイドの連携</Sentence>
+    </BodySection>
   },
   { "image": Scala, "name": "Scala", "rating": 4, "body":
-      <>
-        <P>1年以上の業務経験があります。オブジェクト指向、関数指向の設計および実装ができます。</P>
-        <P>PlayFramework2を活用した一連のWebサーバーサイドの実装を経験しています。</P>
-        <P>とくに関数指向のパラダイムシフトに影響を受けており、他の言語と技術選定の選択肢として提案できます。</P>
-      </>
+    <BodySection>
+      <Sentence>オブジェクト指向、関数指向の設計</Sentence>
+      <Sentence>PlayFramework2を活用したAPI、Web、マイクロサービス設計</Sentence>
+    </BodySection>
   },
 ]
 
@@ -213,7 +224,7 @@ const Skill = () => {
       <Ul>
         {sections.map(v => {
           return (
-            <Li>
+            <Li key={v.name}>
               <Detail>
                 <DetailTitle>
                   {v.image ? <Icon src={v.image}/> : <NoIcon/>}
