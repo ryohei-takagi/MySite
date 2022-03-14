@@ -155,41 +155,41 @@ const sections = [
   { "image": Fargate, "name": "AWS", "rating": 5, "body":
     <BodySection>
       <Sentence>Solution Architect Professional & DevOps Engineer Professional</Sentence>
-      <Sentence>コンテナオーケストレーション、CI/CD、DataLake、ETL・分析基盤の設計</Sentence>
-      <Sentence>サーバーレス、マネージメントサービス主体のソリューション提案</Sentence>
+      <Sentence>コンテナオーケストレーション、CI/CD、DataLake、ETL・分析基盤</Sentence>
+      <Sentence>サーバーレス主体のソリューション提案</Sentence>
     </BodySection>
   },
   { "image": Datadog, "name": "Datadog", "rating": 4, "body":
     <BodySection>
-      <Sentence>ログ配信、ダッシュボード、外形監視、アラート等の監視リソース設計</Sentence>
-      <Sentence>各プロジェクトに応じたサービスレベル目標(SLO)の提案</Sentence>
-      <Sentence>事例 <A target="_blank" href="https://qiita.com/rtflatspace1/items/74c84effcdd040f8517d">外部サイト</A> (Qiita)</Sentence>
+      <Sentence>ログ配信、ダッシュボード、外形監視、アラートの設計</Sentence>
+      <Sentence>サービスレベル目標(SLO)の提案</Sentence>
+      <Sentence>設計事例 <A target="_blank" href="https://qiita.com/rtflatspace1/items/74c84effcdd040f8517d">外部サイト</A> (Qiita)</Sentence>
     </BodySection>
   },
   { "image": Terraform, "name": "Terraform", "rating": 5, "body":
     <BodySection>
       <Sentence>IaC(Infrastructure as Code)の推進</Sentence>
-      <Sentence>AWS、Datadog等のリソースTerraform化</Sentence>
-      <Sentence>事例 <A target="_blank" href="https://qiita.com/rtflatspace1/items/4cb454240586b1480041">外部サイト</A> (Qiita)</Sentence>
+      <Sentence>AWS、DatadogのリソースTerraform化</Sentence>
+      <Sentence>設計事例 <A target="_blank" href="https://qiita.com/rtflatspace1/items/4cb454240586b1480041">外部サイト</A> (Qiita)</Sentence>
     </BodySection>
   },
   { "image": GoIcon, "name": "Go", "rating": 4, "body":
     <BodySection>
       <Sentence>API、Web、マイクロサービスの設計</Sentence>
-      <Sentence>gRPCを利用したサービス間の連携、並行処理による負荷対策</Sentence>
-      <Sentence>事例 <A target="_blank" href="https://qiita.com/rtflatspace1/items/a0ec0017226df76df684">外部サイト</A> (Qiita)</Sentence>
+      <Sentence>gRPCを活用したサービス間の連携、並行処理による負荷対策</Sentence>
+      <Sentence>設計事例 <A target="_blank" href="https://qiita.com/rtflatspace1/items/a0ec0017226df76df684">外部サイト</A> (Qiita)</Sentence>
     </BodySection>
   },
   { "image": Typescript, "name": "Typescript", "rating": 5, "body":
     <BodySection>
-      <Sentence>API、Web、マイクロサービスのサーバーサイド設計</Sentence>
-      <Sentence>ReactやVue.jsを組み合わせたフロントエンド設計</Sentence>
+      <Sentence>API、Web、マイクロサービスの設計</Sentence>
+      <Sentence>React、Vue.jsを組み合わせたフロントエンド設計</Sentence>
     </BodySection>
   },
   { "image": ReactIcon, "name": "React", "rating": 4, "body":
     <BodySection>
       <Sentence>React Hooksを活用したコンポーネント設計</Sentence>
-      <Sentence>ReduxやRecoilを活用したステート管理</Sentence>
+      <Sentence>Recoilを活用したステート管理</Sentence>
     </BodySection>
   },
   { "image": Vue, "name": "Vue.js", "rating": 3, "body":
@@ -200,14 +200,14 @@ const sections = [
   },
   { "image": PHP, "name": "PHP", "rating": 5, "body":
     <BodySection>
-      <Sentence>Laravelを活用したAPI、Webサービス設計</Sentence>
+      <Sentence>API、Web、マイクロサービスの設計</Sentence>
       <Sentence>Laravel、Ethna、ZendFramework2、CakePHP2</Sentence>
     </BodySection>
   },
   { "image": Laravel, "name": "Laravel", "rating": 5, "body":
     <BodySection>
-      <Sentence>Webサービス、キューイング、スケジュールバッチ</Sentence>
-      <Sentence>ReactやVue.jsの連携、認証認可基盤とフロントエンド、サーバーサイドの連携</Sentence>
+      <Sentence>Webサービス、キューイング、スケジュールバッチ、認証認可基盤</Sentence>
+      <Sentence>React、Vue.jsを組み合わせたフロントエンド、サーバーサイド連携</Sentence>
     </BodySection>
   },
   { "image": Scala, "name": "Scala", "rating": 4, "body":
