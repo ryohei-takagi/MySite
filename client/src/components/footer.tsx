@@ -2,7 +2,6 @@ import * as React from 'react'
 import styled from 'styled-components'
 
 const Wrap = styled.section`
-  margin-top: 75px;
   position: relative;
 `
 

@@ -10,15 +10,15 @@ import AWSDeveloperAssociateBadge from '../images/badge/aws-certified-developer-
 import AWSSysOpsAdministratorAssociateBadge from '../images/badge/aws-certified-sysops-administrator-associate.png'
 import AWSSolutionArchitectProfessionalBadge from '../images/badge/aws-certified-solutions-architect-professional.png'
 import AWSDevOpsEngineerProfessionalBadge from '../images/badge/aws-certified-devops-engineer-professional.png'
+import {useEffect, useState} from 'react'
 
-const width = document.documentElement.clientWidth
-const height = document.documentElement.clientHeight
-
-const Wrap = styled.section`
+const Wrap = styled.section<{ height: number }>`
   position: relative;
   width: 100%;
+  
   ${pc`
-    height: ${height}px;
+    height: ${({height}) => height}px;
+    min-height: 640px;
   `}
 `
 
@@ -98,7 +98,7 @@ const thirdPartyData = [
   { "key": "github", "image": GithubIcon, "link": "https://github.com/ryohei-takagi" },
 ]
 
-const ImageUl = styled.ul`
+const ImageUl = styled.ul<{ width: number }>`
   margin-top: 25px;
   
   ${sp`
@@ -109,7 +109,7 @@ const ImageUl = styled.ul`
   `}
   ${pc`
     position: absolute;
-    left: ${width / 2  + 250}px;
+    left: ${({width}) => width / 2  + 250}px;
   `}
 `
 
@@ -133,7 +133,7 @@ const Image = styled.img`
   border-radius: 50%;
 `
 
-const Detail = styled.section`
+const Detail = styled.section<{ width: number }>`
   background-color: #FFFFFF;
   border-radius: 15px;
   
@@ -145,7 +145,7 @@ const Detail = styled.section`
   `}
   ${pc`
     margin: 50px 0 0 150px;
-    max-width: ${width / 10 * 4}px;
+    max-width: ${({width}) => width / 10 * 4}px;
   `}
 `
 
@@ -171,7 +171,7 @@ const P = styled.p`
   line-height: 1.4em;
 `
 
-const AWSBadgeUl = styled.ul`
+const AWSBadgeUl = styled.ul<{ width: number }>`
   ${sp`
     text-align: center;
     margin: 25px 45px 0 45px;
@@ -181,7 +181,7 @@ const AWSBadgeUl = styled.ul`
   `}
   ${pc`
     position: absolute;
-    left: ${width / 2  + 125}px;
+    left: ${({width}) => width / 2  + 125}px;
     top: 450px;
   `}
 `
@@ -206,42 +206,63 @@ const awsBadgeData = [
 ]
 
 const Profile = () => {
+  const [width, setWidth] = useState<number>(0)
+  const [height, setHeight] = useState<number>(0)
+  const [rendered, setRendered] = useState<boolean>(false)
+
+  useEffect(() => {
+    setWidth(document.documentElement.clientWidth)
+    setHeight(document.documentElement.clientHeight)
+    setRendered(true)
+
+    window.addEventListener("resize", () => {
+      setWidth(document.documentElement.clientWidth)
+      setHeight(document.documentElement.clientHeight)
+    })
+
+    return () => {
+      window.removeEventListener("resize", () => {})
+    }
+  }, [])
+
   return (
-    <Wrap id="profile">
-      <H3>PROFILE</H3>
-      <Name>
-        <NameJapanese>高木 涼平</NameJapanese>
-        <NameEnglish>TAKAGI RYOHEI</NameEnglish>
-        <ThirdPartyUl>
-          {thirdPartyData.map(v => {
-            return <ThirdPartyLi key={v.key}><ThirdPartyIcon src={v.image} onClick={() => window.open(v.link)}/></ThirdPartyLi>
+    rendered ?
+      <Wrap height={height} id="profile">
+        <H3>PROFILE</H3>
+        <Name>
+          <NameJapanese>高木 涼平</NameJapanese>
+          <NameEnglish>TAKAGI RYOHEI</NameEnglish>
+          <ThirdPartyUl>
+            {thirdPartyData.map(v => {
+              return <ThirdPartyLi key={v.key}><ThirdPartyIcon src={v.image} onClick={() => window.open(v.link)}/></ThirdPartyLi>
+            })}
+          </ThirdPartyUl>
+        </Name>
+        <ImageUl width={width}>
+          <ImageLi><Image src={Profile1}/></ImageLi>
+        </ImageUl>
+        <Detail width={width}>
+          <DetailTitle>DevOpsエンジニア・アーキテクト</DetailTitle>
+          <DetailBody>
+            <P>1991年生まれ</P>
+            <P>2014年から2018年まで中小IT企業でSI業務に従事</P>
+            <P>2018年から現在までスタートアップ企業でクラウド設計・SRE業務に従事</P>
+          </DetailBody>
+        </Detail>
+        <Detail width={width}>
+          <HobbyTitle>趣味</HobbyTitle>
+          <HobbyBody>
+            <P>・競技麻雀</P>
+            <P>・アニソンライブ観戦</P>
+          </HobbyBody>
+        </Detail>
+        <AWSBadgeUl width={width}>
+          {awsBadgeData.map(v => {
+            return <AWSBadgeLi key={v.key}><AWSBadge src={v.image} onClick={() => window.open(v.link)}/></AWSBadgeLi>
           })}
-        </ThirdPartyUl>
-      </Name>
-      <ImageUl>
-        <ImageLi><Image src={Profile1}/></ImageLi>
-      </ImageUl>
-      <Detail>
-        <DetailTitle>DevOpsエンジニア・アーキテクト</DetailTitle>
-        <DetailBody>
-          <P>1991年生まれ</P>
-          <P>2014年から2018年まで中小IT企業でSI業務に従事</P>
-          <P>2018年から現在までスタートアップ企業でクラウド設計・SRE業務に従事</P>
-        </DetailBody>
-      </Detail>
-      <Detail>
-        <HobbyTitle>趣味</HobbyTitle>
-        <HobbyBody>
-          <P>・競技麻雀</P>
-          <P>・アニソンライブ観戦</P>
-        </HobbyBody>
-      </Detail>
-      <AWSBadgeUl>
-        {awsBadgeData.map(v => {
-          return <AWSBadgeLi key={v.key}><AWSBadge src={v.image} onClick={() => window.open(v.link)}/></AWSBadgeLi>
-        })}
-      </AWSBadgeUl>
-    </Wrap>
+        </AWSBadgeUl>
+      </Wrap> :
+      <></>
   )
 }
 

@@ -1,19 +1,14 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import {pc, sp, tab} from '../styles/responsive'
-import {useCallback, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import ContactConfirm from './contact_confirm'
 import ContactComplete from './contact_complete'
-
-const width = document.documentElement.clientWidth
-const height = document.documentElement.clientHeight
 
 const Wrap = styled.section`
   position: relative;
   width: 100%;
-  ${pc`
-    height: ${height}px;
-  `}
+  margin-bottom: 25px;
 `
 
 const H3 = styled.h3`
@@ -34,7 +29,7 @@ const H3 = styled.h3`
   `}
 `
 
-const DefinitionList = styled.dl`
+const DefinitionList = styled.dl<{ width: number }>`
   height: 520px;
 
   ${sp`
@@ -45,7 +40,7 @@ const DefinitionList = styled.dl`
   `}
   ${pc`
     margin: 50px 0 0 150px;
-    max-width: ${width / 2}px;
+    max-width: ${({width}) => width / 2}px;
   `}
 `
 
@@ -95,7 +90,7 @@ const ButtonArea = styled.div`
   height: 50px;
 `
 
-const SubmitButton = styled.button`
+const SubmitButton = styled.button<{ width: number }>`
   position: absolute;
   left 0;
   right: 0;
@@ -120,16 +115,31 @@ const SubmitButton = styled.button`
   `}
   ${pc`
     margin: 10px 0 0 150px;
-    max-width: ${width / 2}px;
+    max-width: ${({width}) => width / 2}px;
   `}
 `
 
 const Contact = () => {
+  const [width, setWidth] = useState<number>(0)
+  const [rendered, setRendered] = useState<boolean>(false)
   const [name, setName] = useState<string>("")
   const [mail, setMail] = useState<string>("")
   const [body, setBody] = useState<string>("")
   const [confirm, setConfirm] = useState<boolean>(false)
   const [complete, setComplete] = useState<boolean>(false)
+
+  useEffect(() => {
+    setWidth(document.documentElement.clientWidth)
+    setRendered(true)
+
+    window.addEventListener("resize", () => {
+      setWidth(document.documentElement.clientWidth)
+    })
+
+    return () => {
+      window.removeEventListener("resize", () => {})
+    }
+  }, [])
 
   const onSubmit = useCallback(() => {
     setConfirm(false)
@@ -141,44 +151,46 @@ const Contact = () => {
   }, [])
 
   return (
-    <Wrap id="contact">
-      <H3>CONTACT</H3>
-      <DefinitionList>
-        <Field>
-          <DefinitionTerm>お名前<Sub>※</Sub></DefinitionTerm>
-          <DefinitionDescription>
-            <InputField type="text" onChange={(event) => setName(event.target.value)} value={name} />
-          </DefinitionDescription>
-        </Field>
-        <Field>
-          <DefinitionTerm>メールアドレス<Sub>※</Sub></DefinitionTerm>
-          <DefinitionDescription>
-            <InputField type="text" onChange={(event) => setMail(event.target.value)} value={mail} />
-          </DefinitionDescription>
-        </Field>
-        <Field>
-          <DefinitionTerm>お問い合わせ内容<Sub>※</Sub></DefinitionTerm>
-          <DefinitionDescription>
-            <TextArea onChange={(event) => setBody(event.target.value)} value={body} />
-          </DefinitionDescription>
-        </Field>
-      </DefinitionList>
-      <ButtonArea>
-        <SubmitButton onClick={() => setConfirm(true)}>送信</SubmitButton>
-      </ButtonArea>
-      <ContactConfirm
-        open={confirm}
-        onSubmit={onSubmit}
-        onClose={() => setConfirm(false)}
-        inputName={name}
-        inputMail={mail}
-        inputBody={body}
-      />
-      <ContactComplete
-        open={complete}
-        onClose={() => setComplete(false)}
-      />
-    </Wrap>
+    rendered ?
+      <Wrap id="contact">
+        <H3>CONTACT</H3>
+        <DefinitionList width={width}>
+          <Field>
+            <DefinitionTerm>お名前<Sub>※</Sub></DefinitionTerm>
+            <DefinitionDescription>
+              <InputField type="text" onChange={(event) => setName(event.target.value)} value={name} />
+            </DefinitionDescription>
+          </Field>
+          <Field>
+            <DefinitionTerm>メールアドレス<Sub>※</Sub></DefinitionTerm>
+            <DefinitionDescription>
+              <InputField type="text" onChange={(event) => setMail(event.target.value)} value={mail} />
+            </DefinitionDescription>
+          </Field>
+          <Field>
+            <DefinitionTerm>お問い合わせ内容<Sub>※</Sub></DefinitionTerm>
+            <DefinitionDescription>
+              <TextArea onChange={(event) => setBody(event.target.value)} value={body} />
+            </DefinitionDescription>
+          </Field>
+        </DefinitionList>
+        <ButtonArea>
+          <SubmitButton width={width} onClick={() => setConfirm(true)}>送信</SubmitButton>
+        </ButtonArea>
+        <ContactConfirm
+          open={confirm}
+          onSubmit={onSubmit}
+          onClose={() => setConfirm(false)}
+          inputName={name}
+          inputMail={mail}
+          inputBody={body}
+        />
+        <ContactComplete
+          open={complete}
+          onClose={() => setComplete(false)}
+        />
+      </Wrap> :
+      <></>
   )
 }
 

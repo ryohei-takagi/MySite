@@ -3,12 +3,10 @@ import styled from 'styled-components'
 import {pc, sp, tab} from '../styles/responsive'
 import {useCallback, useEffect, useState} from 'react'
 
-const height = document.documentElement.clientHeight
-
-const Wrap = styled.section`
+const Wrap = styled.section<{ height: number }>`
   position: relative;
   width: 100%;
-  height: ${height}px;
+  height: ${({height}) => height}px;
 `
 
 const H1 = styled.h1`
@@ -95,8 +93,8 @@ const H2 = styled.h2`
   `}
 `
 
-const SubTitle = styled.div.attrs(props => ({ isTyping: props.isTyping }))`
-  ${props => props.isTyping ? `
+const SubTitle = styled.div<{ isTyping: boolean }>`
+  ${({isTyping}) => isTyping ? `
     @keyframes blink {
       0% {background-color: currentColor}
       50% {background-color: currentColor}
@@ -135,6 +133,8 @@ const text1st = "DevOps Engineer"
 const text2nd = " & Architect"
 
 const Top = () => {
+  const [height, setHeight] = useState<number>(0)
+  const [rendered, setRendered] = useState<boolean>(false)
   const [subTitle, setSubTitle] = useState<string>("")
   const [isTyping, setIsTyping] = useState<boolean>(false)
 
@@ -148,6 +148,19 @@ const Top = () => {
 
     const rand = Math.random() * 50
     setTimeout(() => setChar(charItr), 50 + rand)
+  }, [])
+
+  useEffect(() => {
+    setHeight(document.documentElement.clientHeight)
+    setRendered(true)
+
+    window.addEventListener("resize", () => {
+      setHeight(document.documentElement.clientHeight)
+    })
+
+    return () => {
+      window.removeEventListener("resize", () => {})
+    }
   }, [])
 
   useEffect(() => {
@@ -171,15 +184,17 @@ const Top = () => {
   }, [subTitle])
 
   return (
-    <Wrap>
-      <H1>
-        <FirstName>RYOHEI</FirstName>
-        <LastName>TAKAGI</LastName>
-      </H1>
-      <H2>
-        <SubTitle isTyping={isTyping}>{subTitle}</SubTitle>
-      </H2>
-    </Wrap>
+    rendered ?
+      <Wrap height={height}>
+        <H1>
+          <FirstName>RYOHEI</FirstName>
+          <LastName>TAKAGI</LastName>
+        </H1>
+        <H2>
+          <SubTitle isTyping={isTyping}>{subTitle}</SubTitle>
+        </H2>
+      </Wrap> :
+      <></>
   )
 }
 

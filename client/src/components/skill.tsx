@@ -12,8 +12,7 @@ import Vue from '../images/icons/vue.png'
 import PHP from '../images/icons/php.png'
 import Laravel from '../images/icons/laravel.png'
 import Scala from '../images/icons/scala.png'
-
-const width = document.documentElement.clientWidth
+import {useEffect, useState} from 'react'
 
 const Wrap = styled.section`
   position: relative;
@@ -50,7 +49,7 @@ const Ul = styled.ul`
   `}
 `
 
-const Li = styled.li`
+const Li = styled.li<{ width: number }>`
   margin-bottom: 20px;
   
   ${sp`
@@ -61,18 +60,18 @@ const Li = styled.li`
   `}
   ${pc`
     display: inline-flex;
-    width: ${width / 10 * 4}px;
+    width: ${({width}) => width / 10 * 4}px;
     max-width: 480px;
     margin-right: 20px;
   `}
 `
 
-const Detail = styled.section`
+const Detail = styled.section<{ width: number }>`
   background-color: #FFFFFF;
   border-radius: 15px;
   
   ${pc`
-    width: ${width / 10 * 4}px;
+    width: ${({width}) => width / 10 * 4}px;
     max-width: 480px;
     height: 260px;
   `}
@@ -219,28 +218,46 @@ const sections = [
 ]
 
 const Skill = () => {
+  const [width, setWidth] = useState<number>(0)
+  const [rendered, setRendered] = useState<boolean>(false)
+
+  useEffect(() => {
+    setWidth(document.documentElement.clientWidth)
+    setRendered(true)
+
+    window.addEventListener("resize", () => {
+      setWidth(document.documentElement.clientWidth)
+    })
+
+    return () => {
+      window.removeEventListener("resize", () => {})
+    }
+  }, [])
+
   return (
-    <Wrap id="skill">
-      <H3>SKILL</H3>
-      <Ul>
-        {sections.map(v => {
-          return (
-            <Li key={v.name}>
-              <Detail>
-                <DetailTitle>
-                  {v.image ? <Icon src={v.image}/> : <NoIcon/>}
-                  <Name>{v.name}</Name>
-                  <Star name="read-only" value={v.rating} size="small" readOnly />
-                </DetailTitle>
-                <DetailBody>
-                  {v.body}
-                </DetailBody>
-              </Detail>
-            </Li>
-          )
-        })}
-      </Ul>
-    </Wrap>
+    rendered ?
+      <Wrap id="skill">
+        <H3>SKILL</H3>
+        <Ul>
+          {sections.map(v => {
+            return (
+              <Li width={width} key={v.name}>
+                <Detail width={width}>
+                  <DetailTitle>
+                    {v.image ? <Icon src={v.image}/> : <NoIcon/>}
+                    <Name>{v.name}</Name>
+                    <Star name="read-only" value={v.rating} size="small" readOnly />
+                  </DetailTitle>
+                  <DetailBody>
+                    {v.body}
+                  </DetailBody>
+                </Detail>
+              </Li>
+            )
+          })}
+        </Ul>
+      </Wrap> :
+      <></>
   )
 }
 
