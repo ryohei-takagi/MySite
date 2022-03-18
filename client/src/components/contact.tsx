@@ -4,6 +4,7 @@ import {pc, sp, tab} from '../styles/responsive'
 import {useCallback, useEffect, useState} from 'react'
 import ContactConfirm from './contact_confirm'
 import ContactComplete from './contact_complete'
+import ContactError from './contact_error'
 
 const Wrap = styled.section`
   position: relative;
@@ -127,6 +128,7 @@ const Contact = () => {
   const [body, setBody] = useState<string>("")
   const [confirm, setConfirm] = useState<boolean>(false)
   const [complete, setComplete] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
 
   useEffect(() => {
     setWidth(document.documentElement.clientWidth)
@@ -150,18 +152,22 @@ const Contact = () => {
       "body": body,
     }
 
-    const res = await fetch("https://api.ryohei-takagi.me/contact", {
-      method: "POST",
-      body: JSON.stringify(data)
-    })
+    try {
+      await fetch("https://api.ryohei-takagi.me/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
 
-    console.log(res)
-
-    setComplete(true)
-
-    setName("")
-    setMail("")
-    setBody("")
+      setComplete(true)
+      setName("")
+      setMail("")
+      setBody("")
+    } catch (err) {
+      setError(true)
+    }
   }, [name, mail, body])
 
   return (
@@ -202,6 +208,10 @@ const Contact = () => {
         <ContactComplete
           open={complete}
           onClose={() => setComplete(false)}
+        />
+        <ContactError
+          open={error}
+          onClose={() => setError(false)}
         />
       </Wrap> :
       <></>

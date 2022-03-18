@@ -5,11 +5,13 @@ import contact from '@functions/contact';
 const serverlessConfiguration: AWS = {
   service: 'ryohei-takagi-me-api',
   frameworkVersion: '2',
+  variablesResolutionMode: '20210326',
   plugins: ['serverless-esbuild'],
   provider: {
     name: 'aws',
     region: 'ap-northeast-1',
     runtime: 'nodejs14.x',
+    timeout: 10,
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
@@ -17,6 +19,7 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+      SLACK_WEBHOOK_URL: "${self:custom.secrets.SLACK_WEBHOOK_URL}",
     },
     lambdaHashingVersion: '20201221',
   },
@@ -34,6 +37,7 @@ const serverlessConfiguration: AWS = {
       platform: 'node',
       concurrency: 10,
     },
+    secrets: "${ssm(ap-northeast-1):/aws/reference/secretsmanager/ryohei-takagi.me}",
   },
 };
 

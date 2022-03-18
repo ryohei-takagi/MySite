@@ -9,7 +9,7 @@ export const formatJSONResponse = (response: Record<string, unknown>) => {
     statusCode: 200,
     body: JSON.stringify(response),
     headers: {
-      "Access-Control-Allow-Origin": "http://localhost:8000", // Todo
+      "Access-Control-Allow-Origin": "https://ryohei-takagi.me",
       "Access-Control-Allow-Credentials": "true"
     }
   }
