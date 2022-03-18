@@ -77,13 +77,13 @@ const H2 = styled.h2`
     top: 175px;
     height: 18px;
     line-height: 18px;
-    font-size: 1.8em;
+    font-size: 1.5em;
   `}
   ${tab`
     top: 245px;
     height: 25px;
     line-height: 25px;
-    font-size: 2.5em;
+    font-size: 2.25em;
   `}
   ${pc`
     top: 145px;
