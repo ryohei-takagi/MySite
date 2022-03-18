@@ -6,10 +6,12 @@ import Profile from '../components/profile'
 import Skill from '../components/skill'
 import Contact from '../components/contact'
 import Footer from '../components/footer'
+import SEO from '../components/seo'
 
 const IndexPage = () => {
   return (
     <Layout>
+      <SEO/>
       <header>
         <Menu/>
       </header>
