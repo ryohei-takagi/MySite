@@ -1,13 +1,14 @@
 import type { AWS } from '@serverless/typescript';
 
-import hello from '@functions/hello';
+import contact from '@functions/contact';
 
 const serverlessConfiguration: AWS = {
-  service: 'api',
+  service: 'ryohei-takagi-me-api',
   frameworkVersion: '2',
   plugins: ['serverless-esbuild'],
   provider: {
     name: 'aws',
+    region: 'ap-northeast-1',
     runtime: 'nodejs14.x',
     apiGateway: {
       minimumCompressionSize: 1024,
@@ -20,7 +21,7 @@ const serverlessConfiguration: AWS = {
     lambdaHashingVersion: '20201221',
   },
   // import the function via paths
-  functions: { hello },
+  functions: { contact },
   package: { individually: true },
   custom: {
     esbuild: {

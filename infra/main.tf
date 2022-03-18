@@ -9,8 +9,17 @@ data "aws_acm_certificate" "acm" {
   types = ["AMAZON_ISSUED"]
 }
 
+data "aws_acm_certificate" "acm_tokyo" {
+  domain = data.aws_route53_zone.route53.name
+  types = ["AMAZON_ISSUED"]
+}
+
 data "aws_s3_bucket" "log_bucket" {
   bucket = "ryohei-takagi-logs"
+}
+
+data "aws_api_gateway_rest_api" "api" {
+  name = "ryohei-takagi-me-api-production"
 }
 
 resource "aws_s3_bucket" "s3" {
@@ -117,4 +126,43 @@ resource "aws_cloudfront_distribution" "cloudfront" {
     bucket = "${data.aws_s3_bucket.log_bucket.bucket}.s3.amazonaws.com"
     prefix = "ryohei-takagi.me/cloudfront"
   }
+}
+
+resource "aws_route53_record" "cloudfront" {
+  name = "ryohei-takagi.me"
+  type = "A"
+  zone_id = data.aws_route53_zone.route53.id
+
+  alias {
+    evaluate_target_health = false
+    name = aws_cloudfront_distribution.cloudfront.domain_name
+    zone_id = aws_cloudfront_distribution.cloudfront.hosted_zone_id
+  }
+}
+
+resource "aws_api_gateway_domain_name" "api" {
+  domain_name = "api.ryohei-takagi.me"
+  regional_certificate_arn = data.aws_acm_certificate.acm_tokyo.arn
+
+  endpoint_configuration {
+    types = ["REGIONAL"]
+  }
+}
+
+resource "aws_route53_record" "api" {
+  name = aws_api_gateway_domain_name.api.domain_name
+  type = "A"
+  zone_id = data.aws_route53_zone.route53.id
+
+  alias {
+    evaluate_target_health = false
+    name = aws_api_gateway_domain_name.api.regional_domain_name
+    zone_id = aws_api_gateway_domain_name.api.regional_zone_id
+  }
+}
+
+resource "aws_api_gateway_base_path_mapping" "api" {
+  api_id = data.aws_api_gateway_rest_api.api.id
+  stage_name = "production"
+  domain_name = aws_api_gateway_domain_name.api.domain_name
 }

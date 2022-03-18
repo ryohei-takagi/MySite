@@ -141,14 +141,28 @@ const Contact = () => {
     }
   }, [])
 
-  const onSubmit = useCallback(() => {
+  const onSubmit = useCallback(async() => {
     setConfirm(false)
+
+    const data = {
+      "name": name,
+      "mail": mail,
+      "body": body,
+    }
+
+    const res = await fetch("https://api.ryohei-takagi.me/contact", {
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+
+    console.log(res)
+
     setComplete(true)
 
     setName("")
     setMail("")
     setBody("")
-  }, [])
+  }, [name, mail, body])
 
   return (
     rendered ?

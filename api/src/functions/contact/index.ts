@@ -7,12 +7,13 @@ export default {
     {
       http: {
         method: 'post',
-        path: 'hello',
+        path: 'contact',
         request: {
           schemas: {
             'application/json': schema
           }
-        }
+        },
+        cors: true,
       }
     }
   ]
