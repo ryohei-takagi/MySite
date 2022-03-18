@@ -21,6 +21,7 @@
     "@mui/material": "^5.4.4",
     "babel-plugin-styled-components": "^2.0.6",
     "gatsby": "^4.8.0",
+    "gatsby-plugin-google-gtag": "^4.10.0",
     "gatsby-plugin-image": "^2.8.1",
     "gatsby-plugin-react-helmet": "^5.8.0",
     "gatsby-plugin-sharp": "^4.8.1",
