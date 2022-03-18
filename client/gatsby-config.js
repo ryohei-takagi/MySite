@@ -1,8 +1,8 @@
 /** @type {import('gatsby').GatsbyConfig} */
 module.exports = {
   siteMetadata: {
-      title: `new`,
-    siteUrl: `https://www.yourdomain.tld`
+      title: `Ryohei Takagi's Profile site`,
+    siteUrl: `https://ryohei-takagi.me`
   },
   plugins: ["gatsby-plugin-styled-components", "gatsby-plugin-image", "gatsby-plugin-react-helmet", "gatsby-plugin-sharp", "gatsby-transformer-sharp", {
     resolve: 'gatsby-source-filesystem',
